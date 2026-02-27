@@ -1,64 +1,69 @@
+<app-navbar></app-navbar>
 
-<div class="container mt-4">
-  <div class="card shadow">
-    <div class="card-header bg-primary text-white">
+<div class="container-fluid p-0 min-vh-100 d-flex justify-content-center">
+
+  <div class="card border-0 w-80 d-flex flex-column" style="width: 80%;">
+
+    <div class="card-header bg-primary text-white border-0">
       <h5 class="mb-0">Información del Médico</h5>
     </div>
 
-    <div class="card-body">
-      <div class="row g-3">
+    <div class="card-body flex-grow-1 d-flex flex-column" style="background-color: #f4f7fb;">
 
-        <div class="col-md-6">
+    <div class="form-grid flex-grow-1">
+
+        <div>
           <label class="form-label fw-bold">ID Médico</label>
-          <input class="form-control" [value]="medico.idMedico" readonly>
+          <input class="form-control" [value]="medico.idMedico" disabled>
         </div>
 
-        <div class="col-md-6">
+        <div>
           <label class="form-label fw-bold">Número de Colegiatura</label>
-          <input class="form-control" [value]="medico.numeroColegiatura" readonly>
+          <input class="form-control" [value]="medico.numeroColegiatura" disabled>
         </div>
 
-        <div class="col-md-6">
+        <div>
           <label class="form-label fw-bold">Nombres</label>
-          <input class="form-control" [value]="medico.nombres" readonly>
+          <input class="form-control" [value]="medico.nombres" disabled>
         </div>
 
-        <div class="col-md-6">
+        <div>
           <label class="form-label fw-bold">Apellidos</label>
-          <input class="form-control" [value]="medico.apellidos" readonly>
+          <input class="form-control" [value]="medico.apellidos" disabled>
         </div>
 
-        <div class="col-md-6">
+        <div>
           <label class="form-label fw-bold">Especialidad</label>
-          <input 
-            class="form-control"
-            [value]="medico.especialidadResponse.nombre"
-            readonly>
+          <input class="form-control"
+                [value]="medico.especialidadResponse.nombre"
+                disabled>
         </div>
 
-        <div class="col-md-6">
+        <div>
           <label class="form-label fw-bold">Teléfono</label>
-          <input class="form-control" [value]="medico.telefono" readonly>
+          <input class="form-control" [value]="medico.telefono" disabled>
         </div>
 
-        <div class="col-md-6">
+        <div>
           <label class="form-label fw-bold">Correo</label>
-          <input class="form-control" [value]="medico.correo" readonly>
+          <input class="form-control" [value]="medico.correo" disabled>
         </div>
 
-        <div class="col-md-6">
+        <div>
           <label class="form-label fw-bold">Fecha Registro</label>
-          <input class="form-control" [value]="medico.fechaRegistro" readonly>
+          <input class="form-control" [value]="medico.fechaRegistro" disabled>
         </div>
 
       </div>
 
-      <div class="mt-4 text-end">
-        <button class="btn btn-secondary" (click)="retroceder()">
+      <div class="mt-3 text-end">
+        <button class="btn btn-outline-primary" (click)="retroceder()">
           ← Retroceder
         </button>
       </div>
 
     </div>
+
   </div>
+
 </div>

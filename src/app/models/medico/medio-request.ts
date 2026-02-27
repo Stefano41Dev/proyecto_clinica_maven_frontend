@@ -5,6 +5,5 @@ export interface MedicoRequest {
     numeroColegiatura: string;
     telefono: string;
     correo: string;
-    fechaRegistro: string; 
     password: string;
 }

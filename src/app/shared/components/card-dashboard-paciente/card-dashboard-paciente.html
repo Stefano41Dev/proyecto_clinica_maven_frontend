@@ -43,7 +43,11 @@
           <strong>Registrado:</strong>
           {{ paciente.fechaRegistro | date:'longDate' }}
         </p>
-        <button >Ver mas</button>
+        <button 
+          class="badge bg-success border-0"
+          (click)="verDetalle(paciente.idPaciente)">
+          Ver
+        </button>
       </div>
 
     </div>

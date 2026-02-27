@@ -29,9 +29,11 @@ export class Medico {
       `${this.apiUrl}/buscar/${idMedico}`
     );
   }
-  registrarMedico(medicoRequest: MedicoRequest): Observable<string>{
-    return this.http.post<string>(
-      `${this.apiUrl}/registrar`, medicoRequest
-    );
-  }
+ registrarMedico(medicoRequest: MedicoRequest): Observable<string> {
+  return this.http.post(
+    `${this.apiUrl}/registrar`,
+    medicoRequest,
+    { responseType: 'text' }
+  );
+}
 }

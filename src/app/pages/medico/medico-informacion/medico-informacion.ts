@@ -2,10 +2,11 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { MedicoResponse } from '../../../models/medico/medico-response';
 import { Medico } from '../../../core/services/medico';
 import { ActivatedRoute } from '@angular/router';
+import { Navbar } from "../../../shared/components/navbar/navbar";
 
 @Component({
   selector: 'app-medico-informacion',
-  imports: [],
+  imports: [Navbar],
   templateUrl: './medico-informacion.html',
   styleUrl: './medico-informacion.css',
 })

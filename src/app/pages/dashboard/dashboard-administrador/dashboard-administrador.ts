@@ -74,4 +74,7 @@ export class DashboardAdministrador implements OnInit {
   irAMedicos(){
     this.router.navigate(['/medicos']);
   }
+  irAPacientes(){
+    this.router.navigate(['/pacientes']);
+  }
 }

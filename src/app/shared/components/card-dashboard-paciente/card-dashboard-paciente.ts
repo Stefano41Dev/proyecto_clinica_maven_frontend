@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { PacienteResponse } from '../../../models/paciente/paciente-response';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-dashboard-paciente',
@@ -10,4 +11,10 @@ import { CommonModule } from '@angular/common';
 })
 export class CardDashboardPaciente {
   @Input() pacientes :  PacienteResponse[] = [];
+  constructor(
+    private router: Router
+  ){}
+  verDetalle(idMedico: number): void {
+    this.router.navigate(['/pacientes', idMedico]);
+  }
 }

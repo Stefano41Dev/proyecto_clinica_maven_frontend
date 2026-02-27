@@ -1,0 +1,154 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+
+      <div class="card border-0 rounded-4">
+
+        <!-- Header -->
+        <div class="card-header bg-primary text-white rounded-top-4 border-0 p-3">
+          <h5 class="mb-0">
+            <i class="bi bi-person-fill me-2"></i>
+            Registro de Paciente
+          </h5>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body p-4" style="background-color: #f5f7fa;">
+
+          <form [formGroup]="pacienteForm" (ngSubmit)="registrar()">
+
+            <div class="row g-3">
+
+              <!-- Información Personal -->
+              <div class="col-12">
+                <h6 class="text-muted border-bottom pb-2">
+                  Información Personal
+                </h6>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Tipo Documento</label>
+                <select class="form-select"
+                        formControlName="idTipoDocumento">
+                  <option value="">Seleccione tipo documento</option>
+                  <option *ngFor="let tipo of tiposDocumento"
+                          [value]="tipo.idTipoDocumento">
+                    {{ tipo.nombreDocumento }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Número Documento</label>
+                <input type="text"
+                       class="form-control"
+                       formControlName="numeroDocumento">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Nombres</label>
+                <input type="text"
+                       class="form-control"
+                       formControlName="nombres">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Apellidos</label>
+                <input type="text"
+                       class="form-control"
+                       formControlName="apellidos">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Fecha de Nacimiento</label>
+                <input type="date"
+                       class="form-control"
+                       formControlName="fechaNacimiento">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Sexo</label>
+                <select class="form-select"
+                        formControlName="idSexo">
+                  <option value="">Seleccione sexo</option>
+                  <option *ngFor="let tipoSexo of tipoSexo"
+                          [value]="tipoSexo.idSexo">
+                    {{ tipoSexo.sexo }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Estado Civil</label>
+                <select class="form-select"
+                        formControlName="idEstadoCivil">
+                  <option value="">Seleccione estado civil</option>
+                  <option *ngFor="let estado of estadoCivil"
+                          [value]="estado.idEstadoCivil">
+                    {{ estado.nombreEstado }}
+                  </option>
+                </select>
+              </div>
+
+              <!-- Contacto -->
+              <div class="col-12 mt-4">
+                <h6 class="text-muted border-bottom pb-2">
+                  Información de Contacto
+                </h6>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Correo</label>
+                <input type="email"
+                       class="form-control"
+                       formControlName="correo">
+              </div>
+
+              <!-- Seguridad -->
+              <div class="col-12 mt-4">
+                <h6 class="text-muted border-bottom pb-2">
+                  Seguridad
+                </h6>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Contraseña</label>
+                <input type="password"
+                       class="form-control"
+                       formControlName="password">
+              </div>
+
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-4">
+              <div>
+                <a *ngIf="urlVerificacion"
+                  [href]="urlVerificacion"
+                  target="_blank"
+                  class="btn btn-success"
+                  (click)="limpiarFormulario()"
+                  >
+                  Verificar cuenta
+                </a>
+              </div>
+
+              <div>
+                <button type="submit"
+                  class="btn btn-primary px-4"
+                  [disabled]="pacienteForm.invalid">
+                  Registrar Paciente
+                </button>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

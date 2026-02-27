@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PageResponse } from '../../models/page-response';
 import { PacienteResponse } from '../../models/paciente/paciente-response';
+import { PacienteRequest } from '../../models/paciente/paciente-request';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +16,19 @@ export class Paciente {
   constructor(private http: HttpClient) {}
 
   listar(): Observable<PageResponse<PacienteResponse>> {
-  return this.http.get<PageResponse<PacienteResponse>>(
-    `${this.apiUrl}/listar`
-  );
-}
+    return this.http.get<PageResponse<PacienteResponse>>(
+      `${this.apiUrl}/listar`
+    );
+  }
+  listarPaginado(pagina: number, tamPag: number): Observable<PageResponse<PacienteResponse>> {
+    return this.http.get<PageResponse<PacienteResponse>>(
+      `${this.apiUrl}/listar?pagina=${pagina}&tamPag=${tamPag}`
+    );
+  }
+  buscarPorId(id: number): Observable<PacienteResponse> {
+    return this.http.get<PacienteResponse>(`${this.apiUrl}/buscar/${id}`);
+  }
+  registrarPaciente(pacienteRequest: PacienteRequest): Observable<string> {
+    return this.http.post(`${this.apiUrl}/registrar`, pacienteRequest,{ responseType: 'text' });
+  }
 }
