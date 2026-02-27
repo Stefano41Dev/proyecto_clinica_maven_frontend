@@ -1,0 +1,52 @@
+<div class="row g-3">
+
+  <div class="col-md-6 col-lg-4" *ngFor="let paciente of pacientes">
+    <div class="card h-100 border-0 shadow-sm hover-card">
+      
+      <div class="card-body">
+        
+        <!-- Nombre -->
+        <h5 class="card-title mb-1">
+          {{ paciente.nombres }} {{ paciente.apellidos }}
+        </h5>
+
+        <!-- Documento -->
+        <p class="text-muted mb-2">
+          {{ paciente.tipoDocumentoResponse.nombreDocumento }}:
+          {{ paciente.numeroDocumento }}
+        </p>
+
+        <hr>
+
+        <!-- Información -->
+        <p class="mb-1">
+          <strong>Fecha de Nacimiento:</strong>
+          {{ paciente.fechaNacimiento | date:'longDate' }}
+        </p>
+
+        <p class="mb-1">
+          <strong>Sexo:</strong>
+          {{ paciente.tipoSexoResponse.sexo }}
+        </p>
+
+        <p class="mb-1">
+          <strong>Estado Civil:</strong>
+          {{ paciente.estadoCivilResponse.nombreEstado }}
+        </p>
+
+        <p class="mb-1">
+          <strong>Correo:</strong>
+          {{ paciente.correo }}
+        </p>
+
+        <p class="mb-0">
+          <strong>Registrado:</strong>
+          {{ paciente.fechaRegistro | date:'longDate' }}
+        </p>
+        <button >Ver mas</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,64 @@
+
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Información del Médico</h5>
+    </div>
+
+    <div class="card-body">
+      <div class="row g-3">
+
+        <div class="col-md-6">
+          <label class="form-label fw-bold">ID Médico</label>
+          <input class="form-control" [value]="medico.idMedico" readonly>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Número de Colegiatura</label>
+          <input class="form-control" [value]="medico.numeroColegiatura" readonly>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Nombres</label>
+          <input class="form-control" [value]="medico.nombres" readonly>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Apellidos</label>
+          <input class="form-control" [value]="medico.apellidos" readonly>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Especialidad</label>
+          <input 
+            class="form-control"
+            [value]="medico.especialidadResponse.nombre"
+            readonly>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Teléfono</label>
+          <input class="form-control" [value]="medico.telefono" readonly>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Correo</label>
+          <input class="form-control" [value]="medico.correo" readonly>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Fecha Registro</label>
+          <input class="form-control" [value]="medico.fechaRegistro" readonly>
+        </div>
+
+      </div>
+
+      <div class="mt-4 text-end">
+        <button class="btn btn-secondary" (click)="retroceder()">
+          ← Retroceder
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

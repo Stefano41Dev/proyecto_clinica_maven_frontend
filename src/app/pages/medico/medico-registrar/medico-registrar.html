@@ -1,0 +1,112 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+
+      <div class="card shadow-lg border-0 rounded-4">
+        
+        <!-- Header elegante -->
+        <div class="card-header bg-primary text-white rounded-top-4 p-4">
+          <h4 class="mb-0">
+            <i class="bi bi-heart-pulse-fill me-2"></i>
+            Registro de Médico
+          </h4>
+        </div>
+
+        <div class="card-body p-5">
+          <form [formGroup]="medicoForm" (ngSubmit)="registrar()">
+
+            <div class="row g-4">
+
+              <!-- Datos personales -->
+              <div class="col-12">
+                <h6 class="text-muted border-bottom pb-2">
+                  Información Personal
+                </h6>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Nombres</label>
+                <input type="text" class="form-control form-control-lg"
+                  formControlName="nombres">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Apellidos</label>
+                <input type="text" class="form-control form-control-lg"
+                  formControlName="apellidos">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Especialidad</label>
+                <select class="form-select form-select-lg"
+                  formControlName="idEspecialidad">
+                  <option value="">Seleccione especialidad</option>
+                  <option *ngFor="let esp of especialidades"
+                    [value]="esp.id">
+                    {{ esp.nombre }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Número de Colegiatura</label>
+                <input type="text" class="form-control form-control-lg"
+                  formControlName="numeroColegiatura">
+              </div>
+
+              <!-- Contacto -->
+              <div class="col-12 mt-4">
+                <h6 class="text-muted border-bottom pb-2">
+                  Información de Contacto
+                </h6>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Teléfono</label>
+                <input type="text" class="form-control form-control-lg"
+                  formControlName="telefono">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Correo</label>
+                <input type="email" class="form-control form-control-lg"
+                  formControlName="correo">
+              </div>
+
+              <!-- Seguridad -->
+              <div class="col-12 mt-4">
+                <h6 class="text-muted border-bottom pb-2">
+                  Seguridad
+                </h6>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Fecha de Registro</label>
+                <input type="date" class="form-control form-control-lg"
+                  formControlName="fechaRegistro">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control form-control-lg"
+                  formControlName="password">
+              </div>
+
+            </div>
+
+            <div class="text-end mt-5">
+              <button type="submit"
+                class="btn btn-primary btn-lg px-5"
+                [disabled]="medicoForm.invalid">
+                Registrar Médico
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

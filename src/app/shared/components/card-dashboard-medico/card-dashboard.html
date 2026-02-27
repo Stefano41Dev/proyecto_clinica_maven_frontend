@@ -1,0 +1,51 @@
+<div class="row g-3">
+
+  <div class="col-md-6 col-lg-4" *ngFor="let medico of medicos">
+    <div class="card h-100 border-0 shadow-sm hover-card">
+      
+      <div class="card-body">
+        
+        <!-- Nombre -->
+        <h5 class="card-title mb-1">
+          {{ medico.nombres }} {{ medico.apellidos }}
+        </h5>
+
+        <!-- Especialidad -->
+        <p class="text-muted mb-2">
+          {{ medico.especialidadResponse.nombre }}
+        </p>
+
+        <hr>
+
+        <!-- Información -->
+        <p class="mb-1">
+          <strong>Colegiatura:</strong>
+          {{ medico.numeroColegiatura }}
+        </p>
+
+        <p class="mb-1">
+          <strong>Teléfono:</strong>
+          {{ medico.telefono }}
+        </p>
+
+        <p class="mb-1">
+          <strong>Correo:</strong>
+          {{ medico.correo }}
+        </p>
+
+        <p class="mb-0">
+          <strong>Registrado:</strong>
+          {{ medico.fechaRegistro | date:'longDate' }}
+        </p>
+        <button 
+          class="badge bg-success border-0"
+          (click)="verDetalle(medico.idMedico)">
+          Ver
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
