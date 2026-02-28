@@ -3,11 +3,12 @@ import { PageResponse } from '../../models/page-response';
 import { PacienteResponse } from '../../models/paciente/paciente-response';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environment/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CitaResponse } from '../../models/cita/cita-response';
 import { CitaRequest } from '../../models/cita/cita-request';
 import { CitaDatosCompletosResponse } from '../../models/cita/cita-datos-completos-response';
 import { CitaUpdateRequest } from '../../models/cita/cita-update-request';
+import { EstadoCitaRequest } from '../../models/estado-cita/estado-cita-request';
 
 @Injectable({
   providedIn: 'root',
@@ -49,4 +50,30 @@ export class Cita {
             `${this.apiUrl}/buscar-citas-correo/${correo}?pagina=${pagina}&tamPag=${tamPag}`
         );
     }
+    
+    listarCitasPorEstado(
+        pagina: number,
+        tamPag: number,
+        idEstadoCita?: number | null,
+        fecha?: string | null
+        ): Observable<PageResponse<CitaResponse>> {
+
+        let params = new HttpParams()
+            .set('pagina', pagina)
+            .set('tamPag', tamPag);
+
+        if (idEstadoCita) {
+            params = params.set('idEstadoCita', idEstadoCita);
+        }
+
+        if (fecha) {
+            params = params.set('fecha', fecha);
+        }
+
+        return this.http.get<PageResponse<CitaResponse>>(
+            `${this.apiUrl}/listar-filtro`,
+            { params }
+        );
+}
+    
 }

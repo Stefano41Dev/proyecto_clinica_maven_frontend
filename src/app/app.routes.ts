@@ -18,6 +18,7 @@ import { PacienteActualizar } from './pages/paciente/paciente-actualizar/pacient
 import { CitaActualizar } from './pages/cita/cita-actualizar/cita-actualizar';
 import { HistorialMedicoListado } from './pages/historial-medico/historial-medico-listado/historial-medico-listado';
 import { CitaListadoPaciente } from './pages/cita/cita-listado-paciente/cita-listado-paciente';
+import { DashboardMedico } from './pages/dashboard/dashboard-medico/dashboard-medico';
 
 
 export const routes: Routes = [
@@ -31,7 +32,10 @@ export const routes: Routes = [
         path: 'dashboard-paciente', component: DashboardPaciente, canActivate: [RoleGuard],
         data: { roles: ['PACIENTE']}
     },
-     
+    {
+       path: 'dashboard-medico', component: DashboardMedico, canActivate: [RoleGuard], 
+       data: { roles: ['MEDICO'] }
+    },
     { 
         path: 'historial-medico', canActivate: [RoleGuard],
         data: { roles: ['PACIENTE'] },
