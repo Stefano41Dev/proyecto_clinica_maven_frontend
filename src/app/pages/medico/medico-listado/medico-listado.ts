@@ -54,5 +54,7 @@ export class MedicoListado {
   verDetalle(id: number): void {
     this.router.navigate(['/medicos', id]);
   }
-  
+  editar(id: number){
+    this.router.navigate(['/medicos/actualizar', id]);
+  }
 }

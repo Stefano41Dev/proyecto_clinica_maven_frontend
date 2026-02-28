@@ -30,10 +30,16 @@ export class Medico {
     );
   }
  registrarMedico(medicoRequest: MedicoRequest): Observable<string> {
-  return this.http.post(
-    `${this.apiUrl}/registrar`,
-    medicoRequest,
-    { responseType: 'text' }
-  );
-}
+    return this.http.post(
+      `${this.apiUrl}/registrar`,
+      medicoRequest,
+      { responseType: 'text' }
+    );
+  }
+  actualizar(idMedico: number, medicoRequest: MedicoRequest): Observable<MedicoResponse>{
+    return this.http.put<MedicoResponse>(
+      `${this.apiUrl}/actualizar/${idMedico}`,
+      medicoRequest
+    );
+  }
 }

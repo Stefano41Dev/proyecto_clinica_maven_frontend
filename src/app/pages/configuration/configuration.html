@@ -391,13 +391,9 @@
             </div>
           </div>
         </div>
-
-      </div>
-
-
-      <div class="modal fade" id="modalEliminarTipoDocumento" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
+        <div class="modal fade" id="modalEliminarTipoDocumento" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
                   <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title">Eliminar Tipo Documental</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
@@ -419,33 +415,148 @@
 
                 </div>
             </div>
-      </div>
-      <div class="modal fade" id="modalEditarTipoDocumento" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-
-            <div class="modal-header bg-warning">
-              <h5 class="modal-title">Editar Tipo Documento</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body">
-              <input type="text"
-                    class="form-control"
-                    [(ngModel)]="nombreEstadoCivilEditar">
-            </div>
-
-            <div class="modal-footer">
-              <button class="btn btn-secondary" data-bs-dismiss="modal">
-                Cancelar
-              </button>
-              <button class="btn btn-warning"
-                      (click)="confirmarEditarTipoDocumento()">
-                Guardar Cambios
-              </button>
-            </div>
-
           </div>
+
+          <div class="modal fade" id="modalEditarTipoDocumento" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+
+                <div class="modal-header bg-warning">
+                  <h5 class="modal-title">Editar Tipo Documento</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                  <input type="text"
+                        class="form-control"
+                        [(ngModel)]="nombreTipoDocumentoEditar">
+                </div>
+
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                  </button>
+                  <button class="btn btn-warning"
+                          (click)="confirmarEditarTipoDocumento()">
+                    Guardar Cambios
+                  </button>
+                </div>
+
+              </div>
+            </div>
         </div>
-    </div>
+
+        <!--Tipo Sexo-->
+          <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+            <div class="card-header bg-info text-white">
+              Tipo de Sexo
+            </div>
+
+            <div class="card-body">
+              <form [formGroup]="tipoSexoForm" (ngSubmit)="registrarTipoSexo()">
+                <div class="input-group mb-3">
+                  <input type="text"
+                        class="form-control"
+                        placeholder="Nombre tipo documento"
+                        formControlName="sexo">
+                  <button type="submit"
+                          class="btn btn-info text-white px-4"
+                          [disabled]="tipoSexoForm.invalid">
+                    Agregar
+                  </button>
+                </div>
+              </form>
+
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead class="table-light">
+                    <tr>
+                      <th>ID</th>
+                      <th>Tipo</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let tipo of tiposSexo">
+                      <td>{{ tipo.idSexo }}</td>
+                      <td>{{ tipo.sexo }}</td>
+                      <td>
+                        <button class="btn btn-sm btn-warning me-2"
+                                (click)="abrirModalEditarTipoSexo(tipo.idSexo)">
+                          Editar
+                        </button>
+
+                        <button class="btn btn-sm btn-danger"
+                                (click)="abrirModalEliminarTipoSexo(tipo.idSexo)">
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal fade" id="modalEliminarTipoSexo" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Eliminar Tipo Documental</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                  </div>
+
+                  <div class="modal-body text-center">
+                      ¿Seguro que deseas eliminar este tipo de sexo?
+                  </div>
+
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button class="btn btn-danger"
+                              (click)="confirmarEliminarTipoSexo()">
+                        Confirmar
+                    </button>
+                  </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalEditarTipoSexo" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+
+                <div class="modal-header bg-warning">
+                  <h5 class="modal-title">Editar Tipo Sexo</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                  <input type="text"
+                        class="form-control"
+                        [(ngModel)]="nombreTipoSexo">
+                </div>
+
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                  </button>
+                  <button class="btn btn-warning"
+                          (click)="confirmarEditarTipoSexo()">
+                    Guardar Cambios
+                  </button>
+                </div>
+
+              </div>
+            </div>
+        </div>
+
+      </div>
 </div>

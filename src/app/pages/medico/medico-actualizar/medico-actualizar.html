@@ -1,0 +1,104 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+
+      <div class="card border-0 rounded-4">
+
+        <!-- Header -->
+        <div class="card-header bg-primary text-white rounded-top-4 border-0 p-3">
+          <h5 class="mb-0">
+            <i class="bi bi-pencil-square me-2"></i>
+            Actualizar Médico
+          </h5>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body p-4" style="background-color: #f5f7fa;">
+
+          <form [formGroup]="medicoForm" (ngSubmit)="actualizar()">
+
+            <div class="row g-3">
+
+              <!-- Información Personal -->
+              <div class="col-12">
+                <h6 class="text-muted border-bottom pb-2">
+                  Información Personal
+                </h6>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Nombres</label>
+                <input type="text"
+                       class="form-control"
+                       formControlName="nombres">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Apellidos</label>
+                <input type="text"
+                       class="form-control"
+                       formControlName="apellidos">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Especialidad</label>
+                <select class="form-select"
+                        formControlName="idEspecialidad">
+                  <option value="">Seleccione especialidad</option>
+                  <option *ngFor="let esp of especialidades"
+                          [value]="esp.idEspecialidad">
+                    {{ esp.nombre }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Número de Colegiatura</label>
+                <input type="text"
+                       class="form-control"
+                       formControlName="numeroColegiatura">
+              </div>
+
+              <!-- Información de Contacto -->
+              <div class="col-12 mt-4">
+                <h6 class="text-muted border-bottom pb-2">
+                  Información de Contacto
+                </h6>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Teléfono</label>
+                <input type="text"
+                       class="form-control"
+                       formControlName="telefono">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Correo</label>
+                <input type="email"
+                       class="form-control"
+                       formControlName="correo">
+              </div>
+
+            </div>
+
+            <!-- Botón -->
+            <div class="d-flex justify-content-end mt-4">
+              <button type="submit"
+                      class="btn btn-primary px-4"
+                      [disabled]="medicoForm.invalid">
+                Actualizar Médico
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

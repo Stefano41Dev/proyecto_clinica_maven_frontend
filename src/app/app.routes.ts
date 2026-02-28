@@ -13,6 +13,8 @@ import { CitaListado } from './pages/cita/cita-listado/cita-listado';
 import { CitaRegistrar } from './pages/cita/cita-registrar/cita-registrar';
 import { CitaInformacion } from './pages/cita/cita-informacion/cita-informacion';
 import { Configuration } from './pages/configuration/configuration';
+import { MedicoActualizar } from './pages/medico/medico-actualizar/medico-actualizar';
+import { PacienteActualizar } from './pages/paciente/paciente-actualizar/paciente-actualizar';
 
 
 export const routes: Routes = [
@@ -34,6 +36,7 @@ export const routes: Routes = [
         children: [
         { path: '', component: MedicoListado },
         { path: 'registrar', component: MedicoRegistrar},
+        { path: 'actualizar/:id', component: MedicoActualizar},
         { path: ':id', component: MedicoInformacion }
         
         ]
@@ -45,6 +48,7 @@ export const routes: Routes = [
         children: [
         { path: '', component: PacienteListado },
         { path: 'registrar', component: PacienteRegistrar},
+        { path: 'actualizar/:id', component: PacienteActualizar},
         { path: ':id', component: PacienteInformacion }
         
         ]

@@ -28,4 +28,15 @@ export class TipoDocumento{
                    `${this.apiUrl}/buscar/${idTipoDocumento}`
                );
     }
+    eliminar(idTipoDocumento: number): Observable<string>{
+        return this.http.delete(
+        `${this.apiUrl}/eliminar/${idTipoDocumento}`,
+        { responseType: 'text'}
+        );
+    }
+    actualizar(idTipoDocumento: number, tipoDocumentoRequest: TipoDocumentoRequest): Observable<TipoDocumentoResponse>{
+        return this.http.put<TipoDocumentoResponse>(
+                        `${this.apiUrl}/actualizar/${idTipoDocumento}`, tipoDocumentoRequest
+        );
+    }
 }

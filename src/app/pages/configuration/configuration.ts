@@ -14,6 +14,9 @@ import { EstadoCivil } from '../../core/services/estadoCivil';
 import { EstadoCitaRequest } from '../../models/estado-cita/estado-cita-request';
 import { EstadoCivilRequest } from '../../models/estado-civil/estado-civil-request';
 import { TipoDocumentoRequest } from '../../models/tipo-documento/tipo-documento-request';
+import { Sexo } from '../../core/services/tipoSexo';
+import { TipoSexoResponse } from '../../models/sexo/tipo-sexo-response';
+import { TipoSexoRequest } from '../../models/sexo/tipo-sexo-request';
 
 @Component({
   selector: 'app-configuration',
@@ -26,12 +29,13 @@ export class Configuration {
   estadosCita: EstadoCitaResponse[] = [];
   estadosCivil: EstadoCivilResponse[] = [];
   tiposDocumento: TipoDocumentoResponse[] = [];
-
+  tiposSexo: TipoSexoResponse[] = [];
 
   especialidadForm!: FormGroup;
   estadoCitaForm!: FormGroup;
   estadoCivilForm!: FormGroup;
   tipoDocumentoForm!: FormGroup;
+  tipoSexoForm!: FormGroup;
 
   idEspecialidadSeleccionada!: number;
   nombreEspecialidadEditar: string = '';
@@ -44,12 +48,16 @@ export class Configuration {
 
   idTipoDocumentoSeleccionado!: number;
   nombreTipoDocumentoEditar: string = '';
-  
+
+  idTipoSexoSeleccionado!: number;
+  nombreTipoSexo: string = '';  
+
   constructor(
     private especialidadService: Especialidad,
     private estadoCitaService: EstadoCita,
     private estadoCivilService: EstadoCivil,
     private tipoDocumentoService: TipoDocumento,
+    private tipoSexoService: Sexo,
     private fb: FormBuilder,
     private crs: ChangeDetectorRef
   ){}
@@ -72,11 +80,14 @@ export class Configuration {
     this.tipoDocumentoForm = this.fb.group({
       nombreDocumento: [null, [Validators.required]]
     });
-
+    this.tipoSexoForm = this.fb.group({
+      sexo: [null, [Validators.required]]
+    })
     this.cargarEspecialidades();
     this.cargarEstadosCita();
     this.cargarEstadosCivil();
-    this.cargarTiposDocumento()
+    this.cargarTiposDocumento();
+    this.cargarTipoSexo();
   }
 
   registrarEspecialidad(){
@@ -135,6 +146,20 @@ export class Configuration {
         }
       });
   }
+   registrarTipoSexo(){
+    if (this.tipoSexoForm.invalid) return;
+    const tipoDocumentoRequest: TipoSexoRequest = this.tipoSexoForm.value;
+    this.tipoSexoService.registrar(tipoDocumentoRequest)
+    .subscribe({
+        next: () => {
+          this.cargarTipoSexo();
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Error al registrar el tipo de documento  ' );
+        }
+      });
+  }
   cargarEstadosCita(){
     this.estadoCitaService.listar().subscribe({
        next: (response) => {
@@ -164,6 +189,14 @@ export class Configuration {
     this.tipoDocumentoService.listar().subscribe({
       next: (response) => {
         this.tiposDocumento = response;
+        this.crs.detectChanges();
+      }
+    });
+  }
+  cargarTipoSexo(){
+    this.tipoSexoService.listar().subscribe({
+      next: (response) => {
+        this.tiposSexo = response;
         this.crs.detectChanges();
       }
     });
@@ -347,7 +380,7 @@ confirmarEditarTipoDocumento() {
   const request = {
     nombreDocumento: this.nombreTipoDocumentoEditar
   };
-
+  console.log(this.idTipoDocumentoSeleccionado, request)
   this.tipoDocumentoService.actualizar(this.idTipoDocumentoSeleccionado, request)
     .subscribe(() => {
       this.cargarTiposDocumento();
@@ -356,4 +389,54 @@ confirmarEditarTipoDocumento() {
         .hide();
     });
 }
+  abrirModalEliminarTipoSexo(id: number) {
+
+    this.idTipoSexoSeleccionado = id;
+
+    new (window as any).bootstrap.Modal(
+      document.getElementById('modalEliminarTipoSexo')
+    ).show();
+  }
+  confirmarEliminarTipoSexo() {
+    this.tipoSexoService.eliminar(this.idTipoSexoSeleccionado)
+      .subscribe(() => {
+
+        this.cargarTipoSexo();
+
+        (window as any).bootstrap.Modal
+          .getInstance(document.getElementById('modalEliminarTipoSexo'))
+          ?.hide();
+      });
+  } 
+  abrirModalEditarTipoSexo(id: number) {
+
+    this.idTipoSexoSeleccionado = id;
+
+    this.tipoSexoService.buscarPorId(id)
+      .subscribe(response => {
+
+        this.nombreTipoSexo = response.sexo;
+
+        new (window as any).bootstrap.Modal(
+          document.getElementById('modalEditarTipoSexo')
+        ).show();
+    });
+  }
+
+  confirmarEditarTipoSexo() {
+
+    const request = {
+      sexo: this.nombreTipoSexo
+    };
+
+    this.tipoSexoService.actualizar(this.idTipoSexoSeleccionado, request)
+      .subscribe(() => {
+
+        this.cargarTipoSexo();
+
+        (window as any).bootstrap.Modal
+          .getInstance(document.getElementById('modalEditarTipoSexo'))
+          ?.hide();
+      });
+  }
 }

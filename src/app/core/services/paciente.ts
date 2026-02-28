@@ -31,4 +31,8 @@ export class Paciente {
   registrarPaciente(pacienteRequest: PacienteRequest): Observable<string> {
     return this.http.post(`${this.apiUrl}/registrar`, pacienteRequest,{ responseType: 'text' });
   }
+  actualizar(id: number, pacienteRequest: PacienteRequest): Observable<PacienteResponse>{
+    return this.http.put<PacienteResponse>(`${this.apiUrl}/actualizar/${id}`, pacienteRequest);
+
+  }
 }

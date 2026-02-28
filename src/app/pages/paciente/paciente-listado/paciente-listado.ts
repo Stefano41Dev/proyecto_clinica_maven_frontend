@@ -52,4 +52,8 @@ export class PacienteListado {
     verDetalle(id: number): void {
       this.router.navigate(['/pacientes', id]);
     }
+
+  editar(id: number){
+    this.router.navigate(['/pacientes/actualizar', id]);
+  }
 }
