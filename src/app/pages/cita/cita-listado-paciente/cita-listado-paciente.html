@@ -1,0 +1,103 @@
+
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-12 col-lg-9">
+      <div class="card shadow-sm">
+        <div class="card-body">
+
+          <h5 class="card-title mb-3">Listado de Citas</h5>
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>ID</th>
+                  <th>Paciente</th>
+                  <th>Medico</th>
+                  <th>Fecha Programada</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let cita of citas">
+                  <td>{{ cita.idCita }}</td>
+                  <td>{{ cita.nombresPaciente }} {{cita.apellidosPaciente}}</td>
+                  <td>{{ cita.nombresMedico }} {{cita.apellidosMedico}}</td>
+                  <td>{{ cita.fechaProgramada | date:'dd/MM/yyyy' }}</td>
+                  <td>{{ cita.estadoCitaResponse.nombreEstado }}</td>
+                    <td>
+                        <button class="badge bg-success border-0"
+                                (click)="verDetalle(cita.idCita)">
+                        Ver Detalle
+                        </button>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  
+    <div class="col-12 col-lg-3 mt-4 mt-lg-0">
+      <div class="card shadow-sm">
+        <div class="card-body">
+
+          <h5 class="card-title mb-3">Filtros</h5>
+
+          <div class="mb-3">
+            <label class="form-label">Buscar</label>
+            <input type="text" class="form-control" placeholder="Ingrese texto...">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Fecha</label>
+            <input type="date" class="form-control">
+          </div>
+
+          <button class="btn btn-primary w-100">
+            Aplicar Filtros
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <nav class="mt-3">
+      <ul class="pagination justify-content-center">
+
+        <!-- Anterior -->
+        <li class="page-item" [class.disabled]="paginaActual === 1">
+          <button class="page-link"
+                  (click)="cambiarPagina(paginaActual - 1)">
+            Anterior
+          </button>
+        </li>
+
+        <!-- Números -->
+        <li class="page-item"
+            *ngFor="let page of [].constructor(totalPaginas); let i = index"
+            [class.active]="paginaActual === i + 1">
+
+          <button class="page-link"
+                  (click)="cambiarPagina(i + 1)">
+            {{ i + 1 }}
+          </button>
+        </li>
+
+        <!-- Siguiente -->
+        <li class="page-item"
+            [class.disabled]="paginaActual === totalPaginas">
+          <button class="page-link"
+                  (click)="cambiarPagina(paginaActual + 1)">
+            Siguiente
+          </button>
+        </li>
+
+      </ul>
+  </nav>
+</div>

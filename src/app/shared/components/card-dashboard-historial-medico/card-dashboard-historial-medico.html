@@ -1,0 +1,35 @@
+<div class="card border-success shadow-sm h-100">
+  <div class="card-body">
+    
+    <h6 class="card-title text-success">
+      {{ historial.fechaConsulta }}
+      <span class="card-title text-success">
+      ## {{ historial.idCita }}
+    </span>
+    </h6>
+
+    <p class="mb-1">
+      <strong>Diagnóstico:</strong> 
+      {{ historial.diagnostico }}
+    </p>
+
+    <p class="mb-1">
+      <strong>Tratamiento:</strong>
+    </p>
+    <ul class="small">
+      <li>
+        {{ historial.tratamiento }}
+      </li>
+    </ul>
+
+    <p class="mb-1">
+      <strong>Observaciones:</strong>
+    </p>
+    <ul class="small">
+      <li >
+        {{ historial.observaciones }}
+      </li>
+    </ul>
+
+  </div>
+</div>

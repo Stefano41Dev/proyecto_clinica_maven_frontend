@@ -34,6 +34,7 @@ export class Login {
         localStorage.setItem('token', response.token);
         const decoded: any = jwtDecode(response.token);
         const rol = decoded.rol;
+        const correo = decoded.sub;
 
         if (rol === 'ADMINISTRADOR') {
             console.log(rol)
@@ -44,7 +45,7 @@ export class Login {
             this.router.navigate(['/dashboard-medico']);
         } else {
             console.log(rol)
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/dashboard-paciente']);
         }
         
       },

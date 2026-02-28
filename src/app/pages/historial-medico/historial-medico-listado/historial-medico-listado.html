@@ -1,0 +1,103 @@
+
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-12 col-lg-9">
+      <div class="card shadow-sm">
+        <div class="card-body">
+
+          <h5 class="card-title mb-3">Listado de Registros</h5>
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>ID</th>
+                  <th>Id Cita</th>
+                  <th>Fecha Consulta</th>
+                  <th>Diagnostico</th>
+                  <th>Observaciones</th>
+                  <th>Tratamiento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let historial of historiales">
+                  <td>{{ historial.idHistorial }}</td>
+                  <td>{{ historial.idCita }}
+                    <button class="badge bg-success border-0"
+                                (click)="verDetalleCita(historial.idCita)">
+                        Ver Detalle
+                    </button>
+                  </td>
+                  <td>{{ historial.fechaConsulta | date:'dd/MM/yyyy'}}</td>
+                  <td>{{ historial.diagnostico }}</td>
+                  <td>{{ historial.observaciones }}</td>
+                  <td>{{ historial.tratamiento }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  
+    <div class="col-12 col-lg-3 mt-4 mt-lg-0">
+      <div class="card shadow-sm">
+        <div class="card-body">
+
+          <h5 class="card-title mb-3">Filtros</h5>
+
+          <div class="mb-3">
+            <label class="form-label">Buscar</label>
+            <input type="text" class="form-control" placeholder="Ingrese texto...">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Fecha</label>
+            <input type="date" class="form-control">
+          </div>
+
+          <button class="btn btn-primary w-100">
+            Aplicar Filtros
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <nav class="mt-3">
+      <ul class="pagination justify-content-center">
+
+        <!-- Anterior -->
+        <li class="page-item" [class.disabled]="paginaActual === 1">
+          <button class="page-link"
+                  (click)="cambiarPagina(paginaActual - 1)">
+            Anterior
+          </button>
+        </li>
+
+        <!-- Números -->
+        <li class="page-item"
+            *ngFor="let page of [].constructor(totalPaginas); let i = index"
+            [class.active]="paginaActual === i + 1">
+
+          <button class="page-link"
+                  (click)="cambiarPagina(i + 1)">
+            {{ i + 1 }}
+          </button>
+        </li>
+
+        <!-- Siguiente -->
+        <li class="page-item"
+            [class.disabled]="paginaActual === totalPaginas">
+          <button class="page-link"
+                  (click)="cambiarPagina(paginaActual + 1)">
+            Siguiente
+          </button>
+        </li>
+
+      </ul>
+  </nav>
+</div>

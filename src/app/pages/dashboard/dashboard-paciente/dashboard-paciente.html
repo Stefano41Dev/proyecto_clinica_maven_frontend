@@ -1,0 +1,75 @@
+<app-navbar-paciente></app-navbar-paciente>
+<div class="container my-4">
+
+  <!-- Caja descriptiva -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <p class="mb-0">
+        Bienvenido a tu dashboard, aquí podrás ver un resumen de tus citas próximas y tu historial médico reciente. Mantente al tanto de tus consultas y revisa tu información médica para estar siempre informado sobre tu salud.
+      </p>
+    </div>
+  </div>
+
+  <!-- Secciones -->
+  <div class="row g-4">
+
+    <!-- CITAS -->
+    <div class="col-12 col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-primary text-white">
+          Citas
+        </div>
+        <div class="card-body">
+
+          <div *ngIf="citas.length === 0" class="text-muted">
+            No hay citas registradas.
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <app-card-dashboard-citas [citas]="citas">
+              </app-card-dashboard-citas>
+            </div>
+          </div>
+
+          <button class="btn btn-primary w-100 mt-3"
+                  (click)="verCitasCompleto()">
+            Ver todo
+          </button>
+
+        </div>
+      </div>
+    </div>
+    <!-- HISTORIAL MEDICO -->
+    <div class="col-12 col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-success text-white">
+          Historial Médico
+        </div>
+        <div class="card-body">
+
+          <div *ngIf="historiales.length === 0" class="text-muted">
+            No hay historiales registrados.
+          </div>
+
+          <div class="row g-3">
+            <div class="col-12 col-md-4"
+                *ngFor="let historial of historiales | slice:0:3">
+              <app-card-dashboard-historial-medico
+                [historial]="historial">
+              </app-card-dashboard-historial-medico>
+            </div>
+          </div>
+
+          <button class="btn btn-primary w-100 mt-3"
+                  (click)="verHistorialCompleto()">
+            Ver todo
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+</div>

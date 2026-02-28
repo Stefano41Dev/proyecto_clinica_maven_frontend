@@ -57,9 +57,16 @@ export class CitaActualizar {
   actualizar() {
     if (this.citaForm.invalid) return;
 
-    const request: CitaUpdateRequest = this.citaForm.value;
+     const formValue = this.citaForm.value;
+    
+    const citaRequest: CitaUpdateRequest = {
+          ...formValue,
+          hora: formValue.hora && formValue.hora.length === 5
+            ? formValue.hora + ':00'
+            : formValue.hora
+        };
 
-    this.citaService.actualizarCita(this.idCita, request)
+    this.citaService.actualizarCita(this.idCita, citaRequest)
       .subscribe({
       next: () => {
         

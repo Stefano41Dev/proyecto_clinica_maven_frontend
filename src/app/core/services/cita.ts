@@ -44,4 +44,9 @@ export class Cita {
           `${this.apiUrl}/actualizar/${idCita}`, citaUpdate
          );
     }
+    buscarCitaPorCorreo(correo: string, pagina: number = 1, tamPag: number = 10): Observable<PageResponse<CitaResponse>> {
+        return this.http.get<PageResponse<CitaResponse>>(
+            `${this.apiUrl}/buscar-citas-correo/${correo}?pagina=${pagina}&tamPag=${tamPag}`
+        );
+    }
 }

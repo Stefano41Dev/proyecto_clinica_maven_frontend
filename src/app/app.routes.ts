@@ -16,6 +16,8 @@ import { Configuration } from './pages/configuration/configuration';
 import { MedicoActualizar } from './pages/medico/medico-actualizar/medico-actualizar';
 import { PacienteActualizar } from './pages/paciente/paciente-actualizar/paciente-actualizar';
 import { CitaActualizar } from './pages/cita/cita-actualizar/cita-actualizar';
+import { HistorialMedicoListado } from './pages/historial-medico/historial-medico-listado/historial-medico-listado';
+import { CitaListadoPaciente } from './pages/cita/cita-listado-paciente/cita-listado-paciente';
 
 
 export const routes: Routes = [
@@ -28,6 +30,21 @@ export const routes: Routes = [
     {   
         path: 'dashboard-paciente', component: DashboardPaciente, canActivate: [RoleGuard],
         data: { roles: ['PACIENTE']}
+    },
+     
+    { 
+        path: 'historial-medico', canActivate: [RoleGuard],
+        data: { roles: ['PACIENTE'] },
+        children: [
+        { path: '', component: HistorialMedicoListado }
+        ]
+    },
+    {
+        path: 'cita-paciente', canActivate: [RoleGuard],
+        data: { roles: ['PACIENTE'] },
+        children: [
+        { path: '', component: CitaListadoPaciente }
+        ]
     }
     ,
     {
@@ -54,16 +71,38 @@ export const routes: Routes = [
         
         ]
     },
-    {
-        path: 'citas',
+   {
+    path: 'citas',
+    children: [
+
+        { 
+        path: '',
+        component: CitaListado,
         canActivate: [RoleGuard],
-        data: { roles: ['ADMINISTRADOR'] },
-        children: [
-        { path: '', component: CitaListado },
-        { path: 'registrar', component: CitaRegistrar},
-        { path: 'actualizar/:id', component: CitaActualizar},
-        { path: ':id', component: CitaInformacion }
-        
+        data: { roles: ['ADMINISTRADOR'] }
+        },
+
+        { 
+        path: 'registrar',
+        component: CitaRegistrar,
+        canActivate: [RoleGuard],
+        data: { roles: ['ADMINISTRADOR'] }
+        },
+
+        { 
+        path: 'actualizar/:id',
+        component: CitaActualizar,
+        canActivate: [RoleGuard],
+        data: { roles: ['ADMINISTRADOR'] }
+        },
+
+        { 
+        path: ':id',
+        component: CitaInformacion,
+        canActivate: [RoleGuard],
+        data: { roles: ['ADMINISTRADOR', 'PACIENTE'] } 
+        }
+
         ]
     },
     {

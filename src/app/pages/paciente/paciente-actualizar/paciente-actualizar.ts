@@ -43,15 +43,15 @@ export class PacienteActualizar {
   }
   inicializarFormulario(): void {
     this.pacienteForm = this.fb.group({
-      idTipoDocumento: ['', Validators.required],
-      numeroDocumento: ['', Validators.required],
-      nombres: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      fechaNacimiento: ['', Validators.required],
-      idSexo: ['', Validators.required],
-      idEstadoCivil: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      idTipoDocumento: [''],
+      numeroDocumento: [''],
+      nombres: [''],
+      apellidos: [''],
+      fechaNacimiento: [''],
+      idSexo: [''],
+      idEstadoCivil: [''],
+      correo: [''],
+      password: ['']
     });
   }
   cargarCatalogos(): void {
