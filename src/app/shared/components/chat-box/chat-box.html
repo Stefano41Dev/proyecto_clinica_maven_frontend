@@ -1,0 +1,36 @@
+@if (!chatAbierto) {
+  <button class="chat-toggle-btn" (click)="toggleChat()">
+    💬 Chat General
+  </button>
+}
+
+@if (chatAbierto) {
+  <div class="chat-container">
+    <div class="chat-header">
+      <span>Sala General</span>
+      <button class="close-btn" (click)="toggleChat()">✕</button>
+    </div>
+
+    <div class="chat-body" id="chat-body-scroll">
+      @for (msg of mensajes; track msg.fechaEnvio) {
+        <div
+             [ngClass]="{'msg-mio': msg.remitente === miNombre, 'msg-otro': msg.remitente !== miNombre}">
+          <div class="msg-bubble">
+            @if (msg.remitente !== miNombre) {
+              <small class="fw-bold d-block text-primary">{{ msg.remitente }}</small>
+            }
+            {{ msg.contenido }}
+          </div>
+          @if (msg.fechaEnvio) {
+            <small class="msg-time">{{ msg.fechaEnvio }}</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="chat-footer">
+      <input type="text" [(ngModel)]="nuevoMensajeTexto" (keyup.enter)="enviar()" placeholder="Escribe un mensaje...">
+      <button (click)="enviar()">Enviar</button>
+    </div>
+  </div>
+}

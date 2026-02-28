@@ -28,12 +28,12 @@
                   <td>{{ cita.fechaProgramada | date:'dd/MM/yyyy' }}</td>
                   <td>{{ cita.estadoCitaResponse.nombreEstado }}</td>
                   <td>
-                    <button 
+                    <button
                       class="badge bg-success border-0"
                       (click)="verDetalle(cita.idCita)">
                       Examinar
                     </button>
-                    
+
                   </td>
                 </tr>
               </tbody>
@@ -44,7 +44,7 @@
       </div>
     </div>
 
-  
+
     <div class="col-12 col-lg-3 mt-4 mt-lg-0">
       <div class="card shadow-sm">
         <div class="card-body">
@@ -111,4 +111,6 @@
 
       </ul>
   </nav>
+
+  <app-chat-box miNombre="Médico"></app-chat-box>
 </div>

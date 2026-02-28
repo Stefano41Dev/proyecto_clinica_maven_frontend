@@ -8,10 +8,11 @@ import { CommonModule } from '@angular/common';
 import { EstadoCita } from '../../../core/services/estadoCita';
 import { EstadoCitaResponse } from '../../../models/estado-cita/estado-cita-response';
 import { FormsModule } from '@angular/forms';
+import {ChatBox} from '../../../shared/components/chat-box/chat-box';
 
 @Component({
   selector: 'app-dashboard-medico',
-  imports: [NavbarPaciente, CommonModule,FormsModule],
+  imports: [NavbarPaciente, CommonModule, FormsModule, ChatBox],
   templateUrl: './dashboard-medico.html',
   styleUrl: './dashboard-medico.css',
 })

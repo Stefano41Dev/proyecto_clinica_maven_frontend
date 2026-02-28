@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Navbar } from "../../../shared/components/navbar/navbar";
-import { HttpClient } from '@angular/common/http';
 import { Medico } from '../../../core/services/medico';
 import { MedicoResponse } from '../../../models/medico/medico-response';
 import { CardDashboard } from "../../../shared/components/card-dashboard-medico/card-dashboard";
@@ -11,15 +10,17 @@ import { CitaResponse } from '../../../models/cita/cita-response';
 import { Cita } from '../../../core/services/cita';
 import { CardDashboardCitas } from "../../../shared/components/card-dashboard-citas/card-dashboard-citas";
 import { Router } from '@angular/router';
+import {ChatBox} from '../../../shared/components/chat-box/chat-box';
 
 @Component({
   selector: 'app-dashboard-administrador',
   standalone: true,
-  imports: [Navbar, CardDashboard, CardDashboardPaciente, CardDashboardCitas],
+  imports: [Navbar, CardDashboard, CardDashboardPaciente, CardDashboardCitas, ChatBox],
   templateUrl: './dashboard-administrador.html',
   styleUrl: './dashboard-administrador.css',
 })
 export class DashboardAdministrador implements OnInit {
+
   medicos: MedicoResponse[] = [];
   pacientes: PacienteResponse[]= [];
   citas: CitaResponse[] = [];
@@ -30,17 +31,19 @@ export class DashboardAdministrador implements OnInit {
     private cdr: ChangeDetectorRef,
     private router: Router
   ){}
+
   ngOnInit(): void {
       this.cargarMedicos();
       this.cargarPacientes();
       this.cargarCitas();
-      
+
   }
+
   cargarCitas(){
     this.citaService.listar().subscribe({
         next: (data) => {
               this.citas = data.contenido;
-              this.cdr.detectChanges(); 
+              this.cdr.detectChanges();
 
           },
           error: (err) => {
@@ -48,11 +51,12 @@ export class DashboardAdministrador implements OnInit {
           }
     })
   }
+
   cargarMedicos(){
     this.medicoService.listar().subscribe({
           next: (data) => {
               this.medicos = data.contenido;
-              this.cdr.detectChanges(); 
+              this.cdr.detectChanges();
 
           },
           error: (err) => {
@@ -60,25 +64,29 @@ export class DashboardAdministrador implements OnInit {
           }
       });
   }
+
   cargarPacientes(){
     this.pacienteService.listar().subscribe({
         next: (data) => {
             this.pacientes = data.contenido;
-            this.cdr.detectChanges(); 
+            this.cdr.detectChanges();
 
         },
         error: (err) => {
             console.error(err);
         }
-      })  
+      })
   }
   irAMedicos(){
     this.router.navigate(['/medicos']);
   }
+
   irAPacientes(){
     this.router.navigate(['/pacientes']);
   }
+
   irACitas(){
     this.router.navigate(['/citas'])
   }
+
 }
