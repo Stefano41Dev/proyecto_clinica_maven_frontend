@@ -9,6 +9,7 @@ import { CitaRequest } from '../../models/cita/cita-request';
 import { CitaDatosCompletosResponse } from '../../models/cita/cita-datos-completos-response';
 import { CitaUpdateRequest } from '../../models/cita/cita-update-request';
 import { EstadoCitaRequest } from '../../models/estado-cita/estado-cita-request';
+import { CitaUpdateEstadoRequest } from '../../models/cita/cita-update-estado-request';
 
 @Injectable({
   providedIn: 'root',
@@ -78,6 +79,11 @@ export class Cita {
             `${this.apiUrl}/listar-filtro`,
             { params }
         );
-}
+    }
+    actualizarEstadoCita(citaUpdateEstadoRequest: CitaUpdateEstadoRequest): Observable<CitaResponse>{
+        return this.http.patch<CitaResponse>(
+          `${this.apiUrl}/cambiar-estado`, citaUpdateEstadoRequest
+         );
+    }
     
 }

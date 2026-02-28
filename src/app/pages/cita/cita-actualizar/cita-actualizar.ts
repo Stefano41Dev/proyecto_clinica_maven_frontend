@@ -5,10 +5,13 @@ import { Cita } from '../../../core/services/cita';
 import { ActivatedRoute } from '@angular/router';
 import { CitaDatosCompletosResponse } from '../../../models/cita/cita-datos-completos-response';
 import { Navbar } from "../../../shared/components/navbar/navbar";
+import { EstadoCita } from '../../../core/services/estadoCita';
+import { EstadoCitaResponse } from '../../../models/estado-cita/estado-cita-response';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cita-actualizar',
-  imports: [Navbar,ReactiveFormsModule],
+  imports: [Navbar, CommonModule,ReactiveFormsModule],
   templateUrl: './cita-actualizar.html',
   styleUrl: './cita-actualizar.css',
 })
@@ -16,18 +19,23 @@ export class CitaActualizar {
   cita!: CitaDatosCompletosResponse;
   citaForm!: FormGroup;
   idCita!: number;
+  estadosCita: EstadoCitaResponse[] = [];
+  estadoForm!: FormGroup;
+  idCitaSeleccionada!: number;
 
   constructor(
     private route: ActivatedRoute,
     private citaService: Cita,
     private fb: FormBuilder,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private estadoCitaService: EstadoCita
   ) {}
 
   ngOnInit(): void {
     this.idCita = Number(this.route.snapshot.paramMap.get('id'));
     this.inicializarFormulario();
     this.buscarCita(this.idCita);
+    this.inicializarFormularioEstado();
   }
 
   inicializarFormulario() {
@@ -37,7 +45,15 @@ export class CitaActualizar {
       hora: ['', Validators.required]
     });
   }
-
+   cargarEstadosCita(){
+    this.estadoCitaService.listar().subscribe({
+      next: (response) => {
+        this.estadosCita = response;
+        console.log(this.estadosCita)
+        this.cdr.detectChanges();
+      }
+    })
+  }
   buscarCita(idCita: number) {
     this.citaService.buscarCita(idCita)
       .subscribe(data => {
@@ -53,7 +69,48 @@ export class CitaActualizar {
         this.cdr.detectChanges();
       });
   }
+  inicializarFormularioEstado() {
+    this.estadoForm = this.fb.group({
+      idEstadoCita: ['', Validators.required]
+    });
+  }
+  abrirModalCambiarEstado(idCita: number) {
+    this.idCitaSeleccionada = idCita;
+    this.cargarEstadosCita();
+    this.estadoForm.reset();
 
+    new (window as any).bootstrap.Modal(
+      document.getElementById('modalCambiarEstado')
+    ).show();
+  }
+
+  actualizarEstado() {
+    if (this.estadoForm.invalid) return;
+
+    const request = {
+      idCita: this.idCitaSeleccionada,
+      idEstadoCita: this.estadoForm.value.idEstadoCita
+    };
+
+    this.citaService.actualizarEstadoCita(request)
+      .subscribe({
+        next: () => {
+
+          
+          const modal = (window as any).bootstrap.Modal.getInstance(
+            document.getElementById('modalCambiarEstado')
+          );
+          modal.hide();
+
+        
+          this.buscarCita(this.idCitaSeleccionada);
+        },
+        error: (err) => {
+          console.error("Error al actualizar estado:", err);
+          alert("Error al actualizar el estado.");
+        }
+      });
+  }
   actualizar() {
     if (this.citaForm.invalid) return;
 

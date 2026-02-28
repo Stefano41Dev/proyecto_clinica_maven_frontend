@@ -111,6 +111,12 @@
         <div class="mt-4 text-end">
           <button type="button"
                   class="btn btn-outline-secondary me-2"
+                  (click)="abrirModalCambiarEstado(cita.idCita)">
+            Cambiar Estado Cita
+          </button>
+
+          <button type="button"
+                  class="btn btn-outline-secondary me-2"
                   (click)="retroceder()">
             Cancelar
           </button>
@@ -127,5 +133,52 @@
     </div>
 
   </div>
+  <!-- ===================== MODAL CAMBIAR ESTADO ===================== -->
+  <div class="modal fade" id="modalCambiarEstado" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
 
+        <div class="modal-header bg-warning">
+          <h5 class="modal-title">Cambiar Estado de Cita</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <form [formGroup]="estadoForm">
+
+            <div class="col-md-12">
+              <label class="form-label">Estado</label>
+              <select class="form-select"
+                      formControlName="idEstadoCita">
+                <option value="" disabled selected>Seleccione estado</option>
+                <option *ngFor="let estado of estadosCita"
+                        [value]="estado.idEstadoCita">
+                  {{ estado.nombreEstado }}
+                </option>
+              </select>
+            </div>
+
+          </form>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal">
+            Retroceder
+          </button>
+
+          <button type="button"
+                  class="btn btn-warning"
+                  (click)="actualizarEstado()"
+                  [disabled]="estadoForm.invalid">
+            Actualizar Estado
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
