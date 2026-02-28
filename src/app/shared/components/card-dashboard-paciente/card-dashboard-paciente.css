@@ -1,0 +1,11 @@
+.scroll-container {
+  height: 300px;
+  overflow-y: auto;
+}
+
+/* Cuando la altura de pantalla sea 720px o menor */
+@media (max-height: 720px) {
+  .scroll-container {
+    height: 100px;
+  }
+}
