@@ -4,10 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HistorialMedicoResponse } from '../../../models/historial-medico/historial-medico-response';
 import { CommonModule } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
+import { NavbarPaciente } from "../../../shared/components/navbar-paciente/navbar-paciente";
+import { Navbar } from "../../../shared/components/navbar/navbar";
 
 @Component({
   selector: 'app-historial-medico-listado',
-  imports: [CommonModule],
+  imports: [CommonModule, NavbarPaciente],
   templateUrl: './historial-medico-listado.html',
   styleUrl: './historial-medico-listado.css',
 })
@@ -51,6 +53,6 @@ export class HistorialMedicoListado {
     this.buscarHistorialMedico(correo, pagina, this.tamanioPagina);
   }
   verDetalleCita(idCita: number): void {
-    this.router.navigate(['/citas', idCita]);  
+    this.router.navigate(['/cita-medico', idCita]);  
   }
 }

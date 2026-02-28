@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { HistorialMedicoResponse } from "../../models/historial-medico/historial-medico-response";
 import { PageResponse } from "../../models/page-response";
+import { HistorialMedicoRequest } from "../../models/historial-medico/historial-medico-request";
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,10 @@ export class HistorialMedico {
                 `${this.apiUrl}/buscar-historial-paciente/${correo}?pagina=${page}&tamPag=${tamPag}`
             );
     }
-
+    generarHistorial(historialRequest: HistorialMedicoRequest): Observable<HistorialMedicoResponse>{
+        return this.http.post<HistorialMedicoResponse>(
+                `${this.apiUrl}/registrar`, historialRequest
+        );
+    }
 
 }

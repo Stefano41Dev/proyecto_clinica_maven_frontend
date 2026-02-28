@@ -5,10 +5,11 @@ import { Cita } from '../../../core/services/cita';
 import { CitaResponse } from '../../../models/cita/cita-response';
 import { PageResponse } from '../../../models/page-response';
 import { jwtDecode } from 'jwt-decode';
+import { NavbarPaciente } from "../../../shared/components/navbar-paciente/navbar-paciente";
 
 @Component({
   selector: 'app-cita-listado-paciente',
-  imports: [CommonModule],
+  imports: [CommonModule, NavbarPaciente],
   templateUrl: './cita-listado-paciente.html',
   styleUrl: './cita-listado-paciente.css',
 })

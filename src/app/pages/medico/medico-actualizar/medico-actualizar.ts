@@ -45,7 +45,8 @@ export class MedicoActualizar {
       idEspecialidad: ['', Validators.required],
       numeroColegiatura: ['', Validators.required],
       telefono: [''],
-      correo: ['', [Validators.required, Validators.email]]
+      correo: ['', [Validators.required, Validators.email]],
+      password: ['']
     });
   }
 

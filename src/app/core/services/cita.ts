@@ -50,7 +50,11 @@ export class Cita {
             `${this.apiUrl}/buscar-citas-correo/${correo}?pagina=${pagina}&tamPag=${tamPag}`
         );
     }
-    
+    consultarEstadoCita(idCita: number) : Observable<boolean>{
+        return this.http.get<boolean>(
+            `${this.apiUrl}/consultar-cita-atendida/${idCita}`
+        );
+    }
     listarCitasPorEstado(
         pagina: number,
         tamPag: number,

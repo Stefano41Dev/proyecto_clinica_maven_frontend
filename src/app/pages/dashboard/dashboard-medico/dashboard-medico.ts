@@ -62,7 +62,7 @@ export class DashboardMedico {
     this.cargarCitas();
   }
   verDetalle(id: number): void {
-    this.router.navigate(['/citas', id]);
+    this.router.navigate(['/cita-medico', id]);
   }
   cargarEstadosCita(): void {
     this.estadoCitaService.listar().subscribe((estados: EstadoCitaResponse[]) => {
