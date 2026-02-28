@@ -1,0 +1,131 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid p-0 min-vh-100 d-flex justify-content-center">
+
+  <div class="card border-0 w-80 d-flex flex-column" style="width: 80%;">
+
+    <div class="card-header bg-warning text-dark border-0">
+      <h5 class="mb-0">Actualizar Cita</h5>
+    </div>
+
+    <div class="card-body flex-grow-1" style="background-color: #f4f7fb;">
+
+      <form [formGroup]="citaForm" (ngSubmit)="actualizar()">
+
+        <!-- ===================== INFORMACIÓN CITA ===================== -->
+        <h6 class="text-muted border-bottom pb-2">Información Cita</h6>
+
+        <div class="row g-3">
+
+          <div class="col-md-4">
+            <label class="form-label fw-bold">ID Cita</label>
+            <input class="form-control" [value]="cita.idCita" disabled>
+          </div>
+
+          <!-- EDITABLE -->
+          <div class="col-md-4">
+            <label class="form-label fw-bold">Fecha Programada</label>
+            <input type="date"
+                   class="form-control"
+                   formControlName="fechaProgramada">
+          </div>
+
+          <!-- EDITABLE -->
+          <div class="col-md-4">
+            <label class="form-label fw-bold">Hora</label>
+            <input type="time"
+                   class="form-control"
+                   formControlName="hora">
+          </div>
+
+          <!-- SOLO LECTURA -->
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Estado</label>
+            <input class="form-control"
+                   [value]="cita.estadoCitaResponse.nombreEstado"
+                   disabled>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label fw-bold">Motivo</label>
+            <textarea class="form-control"
+                      rows="2"
+                      [value]="cita.motivo"
+                      disabled>
+            </textarea>
+          </div>
+
+        </div>
+
+        <!-- ===================== PACIENTE ===================== -->
+        <h6 class="text-muted border-bottom pb-2 mt-4">Información Paciente</h6>
+
+        <div class="row g-3">
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Paciente</label>
+            <input class="form-control"
+              [value]="cita.pacienteResponse.nombres + ' ' + cita.pacienteResponse.apellidos"
+              disabled>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Documento</label>
+            <input class="form-control"
+              [value]="cita.pacienteResponse.tipoDocumentoResponse.nombreDocumento + ' - ' + cita.pacienteResponse.numeroDocumento"
+              disabled>
+          </div>
+
+        </div>
+
+        <!-- ===================== MÉDICO ===================== -->
+        <h6 class="text-muted border-bottom pb-2 mt-4">Información Médico</h6>
+
+        <div class="row g-3">
+
+          <!-- EDITABLE -->
+          <div class="col-md-4">
+            <label class="form-label fw-bold">ID Médico</label>
+            <input type="number"
+                   class="form-control"
+                   formControlName="idMedico">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-bold">Nombre Médico</label>
+            <input class="form-control"
+              [value]="cita.medicoResponse.nombres + ' ' + cita.medicoResponse.apellidos"
+              disabled>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-bold">Especialidad</label>
+            <input class="form-control"
+              [value]="cita.medicoResponse.especialidadResponse.nombre"
+              disabled>
+          </div>
+
+        </div>
+
+        <!-- BOTONES -->
+        <div class="mt-4 text-end">
+          <button type="button"
+                  class="btn btn-outline-secondary me-2"
+                  (click)="retroceder()">
+            Cancelar
+          </button>
+
+          <button type="submit"
+                  class="btn btn-warning"
+                  [disabled]="citaForm.invalid">
+            Actualizar Cita
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

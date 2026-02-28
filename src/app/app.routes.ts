@@ -15,6 +15,7 @@ import { CitaInformacion } from './pages/cita/cita-informacion/cita-informacion'
 import { Configuration } from './pages/configuration/configuration';
 import { MedicoActualizar } from './pages/medico/medico-actualizar/medico-actualizar';
 import { PacienteActualizar } from './pages/paciente/paciente-actualizar/paciente-actualizar';
+import { CitaActualizar } from './pages/cita/cita-actualizar/cita-actualizar';
 
 
 export const routes: Routes = [
@@ -60,6 +61,7 @@ export const routes: Routes = [
         children: [
         { path: '', component: CitaListado },
         { path: 'registrar', component: CitaRegistrar},
+        { path: 'actualizar/:id', component: CitaActualizar},
         { path: ':id', component: CitaInformacion }
         
         ]

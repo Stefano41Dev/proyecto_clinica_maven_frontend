@@ -48,4 +48,7 @@ export class CitaListado {
   verDetalle(id: number): void {
     this.router.navigate(['/citas', id]);
   }
+  editar(id:number){
+    this.router.navigate(['/citas/actualizar', id]);
+  }
 }

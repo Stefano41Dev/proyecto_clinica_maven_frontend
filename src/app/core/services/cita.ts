@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { CitaResponse } from '../../models/cita/cita-response';
 import { CitaRequest } from '../../models/cita/cita-request';
 import { CitaDatosCompletosResponse } from '../../models/cita/cita-datos-completos-response';
+import { CitaUpdateRequest } from '../../models/cita/cita-update-request';
 
 @Injectable({
   providedIn: 'root',
@@ -32,10 +33,15 @@ export class Cita {
             `${this.apiUrl}/registrar`, citaRequest
         );
     }
+
     buscarCita(idCita: number): Observable<CitaDatosCompletosResponse>{
-         return this.http.get<CitaDatosCompletosResponse>(
+        return this.http.get<CitaDatosCompletosResponse>(
             `${this.apiUrl}/buscar-completa/${idCita}`
         );
     }
-    
+    actualizarCita(idCita : number, citaUpdate: CitaUpdateRequest): Observable<CitaResponse>{
+        return this.http.put<CitaResponse>(
+          `${this.apiUrl}/actualizar/${idCita}`, citaUpdate
+         );
+    }
 }
