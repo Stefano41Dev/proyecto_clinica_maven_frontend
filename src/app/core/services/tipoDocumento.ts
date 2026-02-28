@@ -3,6 +3,7 @@ import { environment } from "../../../environment/environment";
 import { HttpClient } from "@angular/common/http";
 import { TipoDocumentoResponse } from "../../models/tipo-documento/tipo-documento-response";
 import { Observable } from "rxjs";
+import { TipoDocumentoRequest } from "../../models/tipo-documento/tipo-documento-request";
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,11 @@ export class TipoDocumento{
     listar(): Observable<TipoDocumentoResponse[]> {
         return this.http.get<TipoDocumentoResponse[]>(
             `${this.apiUrl}/listado`
+        );
+    }
+    registrar(TipoDocumentoRequest: TipoDocumentoRequest): Observable<TipoDocumentoResponse[]> {
+        return this.http.post<TipoDocumentoResponse[]>(
+            `${this.apiUrl}/registrar`,TipoDocumentoRequest
         );
     }
 }

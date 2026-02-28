@@ -1,0 +1,265 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid bg-light min-vh-100 py-4">
+
+  <div class="container">
+
+    <div class="row g-4">
+
+      <!-- ESPECIALIDADES -->
+      <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-primary text-white">
+            Especialidades Medico
+          </div>
+
+          <div class="card-body">
+            <form [formGroup]="especialidadForm" (ngSubmit)="registrarEspecialidad()">
+              <div class="input-group mb-3">
+                
+                  <input type="text" class="form-control" placeholder="Nombre especialidad" formControlName="nombre">
+                  <button
+                    type="submit"
+                    class="btn btn-primary px-4"
+                    [disabled]="especialidadForm.invalid">
+                    Agregar
+                  </button>
+              
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead class="table-light">
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let especialidad of especialidadesMedico">
+                  <td>{{ especialidad.idEspecialidad }}</td>
+                  <td>{{ especialidad.nombre }}</td>
+                  <td>
+                    <button class="btn btn-sm btn-warning me-2"
+                            (click)="abrirModalEditarEspecialidad(especialidad.idEspecialidad)">
+                      Editar
+                    </button>
+
+                    <button class="btn btn-sm btn-danger"
+                            (click)="abrirModalEliminarEspecialidad(especialidad.idEspecialidad)">
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL ELIMINAR ESPECIALIDAD -->
+      <div class="modal fade" id="modalEliminarEspecialidad" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+
+            <div class="modal-header bg-danger text-white">
+              <h5 class="modal-title">Eliminar Especialidad</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body text-center">
+              ¿Seguro que deseas eliminar esta especialidad?
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button class="btn btn-danger"
+                      (click)="confirmarEliminarEspecialidad()">
+                Confirmar
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+     <!-- MODAL EDITAR ESPECIALIDAD -->
+      <div class="modal fade" id="modalEditarEspecialidad" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+
+            <div class="modal-header bg-warning">
+              <h5 class="modal-title">Editar Especialidad</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input type="text"
+                      class="form-control"
+                      [(ngModel)]="nombreEspecialidadEditar">
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button class="btn btn-warning"
+                      (click)="confirmarEditarEspecialidad()">
+                Guardar Cambios
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- ESTADOS CITA -->
+  <div class="col-md-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-header bg-success text-white">
+        Estados de Cita
+      </div>
+
+    <div class="card-body">
+          <form [formGroup]="estadoCitaForm" (ngSubmit)="registrarEstadoCita()">
+            <div class="input-group mb-3">
+              <input type="text"
+                    class="form-control"
+                    placeholder="Nombre estado cita"
+                    formControlName="nombreEstado">
+              <button type="submit"
+                      class="btn btn-success px-4"
+                      [disabled]="estadoCitaForm.invalid">
+                Agregar
+              </button>
+            </div>
+          </form>
+
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let estado of estadosCita">
+                  <td>{{ estado.idEstadoCita }}</td>
+                  <td>{{ estado.nombreEstado }}</td>
+                  <td>Eliminar</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+      <!-- ESTADO CIVIL -->
+      <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-warning text-dark">
+            Estado Civil
+          </div>
+
+          <div class="card-body">
+            <form [formGroup]="estadoCivilForm" (ngSubmit)="registrarEstadoCivil()">
+              <div class="input-group mb-3">
+                <input type="text"
+                      class="form-control"
+                      placeholder="Nombre estado civil"
+                      formControlName="nombreEstado">
+                <button type="submit"
+                        class="btn btn-warning px-4"
+                        [disabled]="estadoCivilForm.invalid">
+                  Agregar
+                </button>
+              </div>
+            </form>
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead class="table-light">
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let estado of estadosCivil">
+                    <td>{{ estado.idEstadoCivil }}</td>
+                    <td>{{ estado.nombreEstado }}</td>
+                    <td>
+                      <button>Eliminar</button>
+                      <button>Editar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      
+
+      <!-- TIPO DOCUMENTO -->
+      <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-info text-white">
+            Tipo de Documento
+          </div>
+
+          <div class="card-body">
+            <form [formGroup]="tipoDocumentoForm" (ngSubmit)="registrarTipoDocumento()">
+              <div class="input-group mb-3">
+                <input type="text"
+                      class="form-control"
+                      placeholder="Nombre tipo documento"
+                      formControlName="nombreDocumento">
+                <button type="submit"
+                        class="btn btn-info text-white px-4"
+                        [disabled]="tipoDocumentoForm.invalid">
+                  Agregar
+                </button>
+              </div>
+            </form>
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead class="table-light">
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let tipo of tiposDocumento">
+                    <td>{{ tipo.idTipoDocumento }}</td>
+                    <td>{{ tipo.nombreDocumento }}</td>
+                    <td>Eliminar</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+
+</div>

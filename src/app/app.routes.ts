@@ -9,6 +9,10 @@ import { MedicoRegistrar } from './pages/medico/medico-registrar/medico-registra
 import { PacienteListado } from './pages/paciente/paciente-listado/paciente-listado';
 import { PacienteInformacion } from './pages/paciente/paciente-informacion/paciente-informacion';
 import { PacienteRegistrar } from './pages/paciente/paciente-registrar/paciente-registrar';
+import { CitaListado } from './pages/cita/cita-listado/cita-listado';
+import { CitaRegistrar } from './pages/cita/cita-registrar/cita-registrar';
+import { CitaInformacion } from './pages/cita/cita-informacion/cita-informacion';
+import { Configuration } from './pages/configuration/configuration';
 
 
 export const routes: Routes = [
@@ -44,6 +48,21 @@ export const routes: Routes = [
         { path: ':id', component: PacienteInformacion }
         
         ]
+    },
+    {
+        path: 'citas',
+        canActivate: [RoleGuard],
+        data: { roles: ['ADMINISTRADOR'] },
+        children: [
+        { path: '', component: CitaListado },
+        { path: 'registrar', component: CitaRegistrar},
+        { path: ':id', component: CitaInformacion }
+        
+        ]
+    },
+    {
+        path: 'configuracion', canActivate: [RoleGuard], component: Configuration,
+        data: { roles: ['ADMINISTRADOR'] } 
     }
     
     

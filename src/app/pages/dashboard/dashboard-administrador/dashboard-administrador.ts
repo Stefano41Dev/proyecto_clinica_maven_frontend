@@ -34,6 +34,7 @@ export class DashboardAdministrador implements OnInit {
       this.cargarMedicos();
       this.cargarPacientes();
       this.cargarCitas();
+      
   }
   cargarCitas(){
     this.citaService.listar().subscribe({
@@ -76,5 +77,8 @@ export class DashboardAdministrador implements OnInit {
   }
   irAPacientes(){
     this.router.navigate(['/pacientes']);
+  }
+  irACitas(){
+    this.router.navigate(['/citas'])
   }
 }

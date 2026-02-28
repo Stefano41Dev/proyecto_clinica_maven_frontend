@@ -30,7 +30,11 @@
         <strong>Estado:</strong>
         {{ cita.estadoCitaResponse.nombreEstado }}
       </p>
-      <button>Ver informacion</button>
+      <button 
+          class="badge bg-success border-0"
+          (click)="verDetalle(cita.idCita)">
+          Ver
+        </button>
     </div>
 
   </div>
