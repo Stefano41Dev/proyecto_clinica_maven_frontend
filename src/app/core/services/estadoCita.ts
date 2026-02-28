@@ -18,10 +18,28 @@ export class EstadoCita{
             `${this.apiUrl}/listado`
         );
     }
+
     registrar(estadoCitaRequest: EstadoCitaRequest): Observable<EstadoCitaResponse[]> {
         return this.http.post<EstadoCitaResponse[]>(
             `${this.apiUrl}/guardar`, estadoCitaRequest
         );
     }
-    
+
+    eliminar(idEstadoCita: number): Observable<string>{
+        return this.http.delete(
+        `${this.apiUrl}/eliminar/${idEstadoCita}`,
+        { responseType: 'text'}
+        );
+    }
+
+    buscarPorId(idEstadoCita: number): Observable<EstadoCitaResponse>{
+        return this.http.get<EstadoCitaResponse>(
+                `${this.apiUrl}/buscar/${idEstadoCita}`
+        );
+    }
+    actualizar(idEstadoCita: number, estadoCitaRequest: EstadoCitaRequest): Observable<EstadoCitaResponse>{
+        return this.http.put<EstadoCitaResponse>(
+                `${this.apiUrl}/actualizar/${idEstadoCita}`, estadoCitaRequest
+        );
+    }
 }

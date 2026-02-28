@@ -154,7 +154,17 @@
                 <tr *ngFor="let estado of estadosCita">
                   <td>{{ estado.idEstadoCita }}</td>
                   <td>{{ estado.nombreEstado }}</td>
-                  <td>Eliminar</td>
+                  <td>
+                    <button class="btn btn-sm btn-warning me-2"
+                            (click)="abrirModalEditarEstadoCita(estado.idEstadoCita)">
+                      Editar
+                    </button>
+
+                    <button class="btn btn-sm btn-danger"
+                            (click)="abrirModalEliminarEstadoCita(estado.idEstadoCita)">
+                      Eliminar
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -163,7 +173,61 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="modalEliminarEstadoCita" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
 
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title">Eliminar Estado de Cita</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body text-center">
+            ¿Seguro que deseas eliminar este estado de cita?
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button class="btn btn-danger"
+                    (click)="confirmarEliminarEstadoCita()">
+              Confirmar
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modalEditarEstadoCita" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <div class="modal-header bg-warning">
+            <h5 class="modal-title">Editar Estado de Cita</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+            <input type="text"
+                  class="form-control"
+                  [(ngModel)]="nombreEstadoCitaEditar">
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button class="btn btn-warning"
+                    (click)="confirmarEditarEstadoCita()">
+              Guardar Cambios
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
       <!-- ESTADO CIVIL -->
       <div class="col-md-6">
         <div class="card shadow-sm h-100">
@@ -200,8 +264,15 @@
                     <td>{{ estado.idEstadoCivil }}</td>
                     <td>{{ estado.nombreEstado }}</td>
                     <td>
-                      <button>Eliminar</button>
-                      <button>Editar</button>
+                      <button class="btn btn-sm btn-warning me-2"
+                              (click)="abrirModalEditarEstadoCivil(estado.idEstadoCivil)">
+                        Editar
+                      </button>
+
+                      <button class="btn btn-sm btn-danger"
+                              (click)="abrirModalEliminarEstadoCivil(estado.idEstadoCivil)">
+                        Eliminar
+                      </button>
                     </td>
                   </tr>
                 </tbody>
@@ -212,10 +283,63 @@
         </div>
       </div>
       
+      <div class="modal fade" id="modalEliminarEstadoCivil" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
 
+            <div class="modal-header bg-danger text-white">
+              <h5 class="modal-title">Eliminar Estado Civil</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body text-center">
+              ¿Seguro que deseas eliminar este estado de civil?
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button class="btn btn-danger"
+                      (click)="confirmarEliminarEstadoCivil()">
+                Confirmar
+              </button>
+            </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalEditarEstadoCivil" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <div class="modal-header bg-warning">
+            <h5 class="modal-title">Editar Estado de Cita</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+            <input type="text"
+                  class="form-control"
+                  [(ngModel)]="nombreEstadoCivilEditar">
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button class="btn btn-warning"
+                    (click)="confirmarEditarEstadoCivil()">
+              Guardar Cambios
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
       <!-- TIPO DOCUMENTO -->
       <div class="col-md-6">
-        <div class="card shadow-sm h-100">
+          <div class="card shadow-sm h-100">
           <div class="card-header bg-info text-white">
             Tipo de Documento
           </div>
@@ -248,18 +372,80 @@
                   <tr *ngFor="let tipo of tiposDocumento">
                     <td>{{ tipo.idTipoDocumento }}</td>
                     <td>{{ tipo.nombreDocumento }}</td>
-                    <td>Eliminar</td>
+                    <td>
+                      <button class="btn btn-sm btn-warning me-2"
+                              (click)="abrirModalEditarTipoDocumento(tipo.idTipoDocumento)">
+                        Editar
+                      </button>
+
+                      <button class="btn btn-sm btn-danger"
+                              (click)="abrirModalEliminarTipoDocumento(tipo.idTipoDocumento)">
+                        Eliminar
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
+            </div>
+          </div>
         </div>
+
       </div>
+
+
+      <div class="modal fade" id="modalEliminarTipoDocumento" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+                  <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Eliminar Tipo Documental</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                  </div>
+
+                  <div class="modal-body text-center">
+                      ¿Seguro que deseas eliminar este tipo de documentol?
+                  </div>
+
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button class="btn btn-danger"
+                              (click)="confirmarEliminarTipoDocumento()">
+                        Confirmar
+                    </button>
+                  </div>
+
+                </div>
+            </div>
+      </div>
+      <div class="modal fade" id="modalEditarTipoDocumento" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+
+            <div class="modal-header bg-warning">
+              <h5 class="modal-title">Editar Tipo Documento</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+              <input type="text"
+                    class="form-control"
+                    [(ngModel)]="nombreEstadoCivilEditar">
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button class="btn btn-warning"
+                      (click)="confirmarEditarTipoDocumento()">
+                Guardar Cambios
+              </button>
+            </div>
+
+          </div>
+        </div>
     </div>
-
-    </div>
-
-  </div>
-
 </div>

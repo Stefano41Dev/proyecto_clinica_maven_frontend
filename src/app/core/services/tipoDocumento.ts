@@ -23,4 +23,9 @@ export class TipoDocumento{
             `${this.apiUrl}/registrar`,TipoDocumentoRequest
         );
     }
+    buscarPorId(idTipoDocumento: number): Observable<TipoDocumentoResponse>{
+        return this.http.get<TipoDocumentoResponse>(
+                   `${this.apiUrl}/buscar/${idTipoDocumento}`
+               );
+    }
 }

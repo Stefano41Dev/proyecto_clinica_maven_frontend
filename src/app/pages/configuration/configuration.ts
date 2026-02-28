@@ -35,7 +35,16 @@ export class Configuration {
 
   idEspecialidadSeleccionada!: number;
   nombreEspecialidadEditar: string = '';
+  
+  idEstadoCitaSeleccionado!: number;
+  nombreEstadoCitaEditar: string = '';
 
+  idEstadoCivilSeleccionado!: number;
+  nombreEstadoCivilEditar: string = '';
+
+  idTipoDocumentoSeleccionado!: number;
+  nombreTipoDocumentoEditar: string = '';
+  
   constructor(
     private especialidadService: Especialidad,
     private estadoCitaService: EstadoCita,
@@ -208,4 +217,143 @@ export class Configuration {
         modal.hide();
       });
   }
+
+  confirmarEliminarEstadoCita() {
+  this.estadoCitaService.eliminar(this.idEstadoCitaSeleccionado)
+    .subscribe(() => {
+      this.cargarEstadosCita();
+      (window as any).bootstrap.Modal
+        .getInstance(document.getElementById('modalEliminarEstadoCita'))
+        .hide();
+    });
+  }
+  abrirModalEliminarEstadoCita(id: number) {
+    this.idEstadoCitaSeleccionado = id;
+
+    const modal = new (window as any).bootstrap.Modal(
+      document.getElementById('modalEliminarEstadoCita')
+    );
+    modal.show();
+  }
+
+  abrirModalEditarEstadoCita(id: number) {
+    
+    this.estadoCitaService.buscarPorId(id)
+      .subscribe(response => {
+
+        this.idEstadoCitaSeleccionado = response.idEstadoCita;
+        this.nombreEstadoCitaEditar = response.nombreEstado;
+
+        const modal = new (window as any).bootstrap.Modal(
+          document.getElementById('modalEditarEstadoCita')
+        );
+        modal.show();
+      });
+  }
+
+  confirmarEditarEstadoCita() {
+    const request = {
+      nombreEstado: this.nombreEstadoCitaEditar
+    };
+
+    this.estadoCitaService.actualizar(this.idEstadoCitaSeleccionado, request)
+      .subscribe(() => {
+        this.cargarEstadosCita();
+        (window as any).bootstrap.Modal
+          .getInstance(document.getElementById('modalEditarEstadoCita'))
+          .hide();
+      });
+  }
+
+  abrirModalEliminarEstadoCivil(id: number) {
+   
+    this.idEstadoCivilSeleccionado = id;
+    
+    new (window as any).bootstrap.Modal(
+      document.getElementById('modalEliminarEstadoCivil')
+    ).show();
+}
+
+confirmarEliminarEstadoCivil() {
+  this.estadoCivilService.eliminar(this.idEstadoCivilSeleccionado)
+    .subscribe(() => {
+      this.cargarEstadosCivil();
+      (window as any).bootstrap.Modal
+        .getInstance(document.getElementById('modalEliminarEstadoCivil'))
+        .hide();
+    });
+}
+
+abrirModalEditarEstadoCivil(id: number) {
+  console.log(id)
+  this.estadoCivilService.buscarPorId(id)
+    .subscribe(response => {
+
+      this.idEstadoCivilSeleccionado = response.idEstadoCivil;
+      this.nombreEstadoCivilEditar = response.nombreEstado;
+
+      new (window as any).bootstrap.Modal(
+        document.getElementById('modalEditarEstadoCivil')
+      ).show();
+    });
+}
+
+confirmarEditarEstadoCivil() {
+  const request = {
+    nombreEstado: this.nombreEstadoCivilEditar
+  };
+
+  this.estadoCivilService.actualizar(this.idEstadoCivilSeleccionado, request)
+    .subscribe(() => {
+      this.cargarEstadosCivil();
+      (window as any).bootstrap.Modal
+        .getInstance(document.getElementById('modalEditarEstadoCivil'))
+        .hide();
+    });
+  }
+
+  abrirModalEliminarTipoDocumento(id: number) {
+  this.idTipoDocumentoSeleccionado = id;
+
+  new (window as any).bootstrap.Modal(
+    document.getElementById('modalEliminarTipoDocumento')
+  ).show();
+}
+
+confirmarEliminarTipoDocumento() {
+  this.tipoDocumentoService.eliminar(this.idTipoDocumentoSeleccionado)
+    .subscribe(() => {
+      this.cargarTiposDocumento();
+      (window as any).bootstrap.Modal
+        .getInstance(document.getElementById('modalEliminarTipoDocumento'))
+        .hide();
+    });
+}
+
+abrirModalEditarTipoDocumento(id: number) {
+  this.tipoDocumentoService.buscarPorId(id)
+    .subscribe(response => {
+
+      this.idTipoDocumentoSeleccionado = response.idTipoDocumento;
+      this.nombreTipoDocumentoEditar = response.nombreDocumento;
+
+      new (window as any).bootstrap.Modal(
+        document.getElementById('modalEditarTipoDocumento')
+      ).show();
+    });
+}
+
+confirmarEditarTipoDocumento() {
+  const request = {
+    nombreDocumento: this.nombreTipoDocumentoEditar
+  };
+
+  this.tipoDocumentoService.actualizar(this.idTipoDocumentoSeleccionado, request)
+    .subscribe(() => {
+      this.cargarTiposDocumento();
+      (window as any).bootstrap.Modal
+        .getInstance(document.getElementById('modalEditarTipoDocumento'))
+        .hide();
+    });
+}
 }

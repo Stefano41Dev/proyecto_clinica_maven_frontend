@@ -24,5 +24,21 @@ export class EstadoCivil{
             `${this.apiUrl}/registrar`, estadoCivilRequest
         );
     }
+    buscarPorId(idEstadoCivil: number): Observable<EstadoCivilResponse>{
+        return this.http.get<EstadoCivilResponse>(
+            `${this.apiUrl}/buscar/${idEstadoCivil}`
+        );
+    }
+    eliminar(idEstadoCivil: number): Observable<string>{
+        return this.http.delete(
+        `${this.apiUrl}/eliminar/${idEstadoCivil}`,
+        { responseType: 'text'}
+        );
+    }
+    actualizar(idEstadoCivil: number, estadoCivilRequest: EstadoCivilRequest): Observable<EstadoCivilResponse>{
+        return this.http.put<EstadoCivilResponse>(
+                `${this.apiUrl}/actualizar/${idEstadoCivil}`, estadoCivilRequest
+        );
+    }   
     
 }
